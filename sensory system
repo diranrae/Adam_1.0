@@ -1,0 +1,49 @@
+#include <iostream>
+
+class Camera {
+public:
+    void captureImage() {
+        std::cout << "Capturing image..." << std::endl;
+        // Capture image from the camera
+        // Code to capture image goes here
+        std::cout << "Image captured!" << std::endl;
+    }
+};
+
+class Microphone {
+public:
+    void recordAudio() {
+        std::cout << "Recording audio..." << std::endl;
+        // Record audio from the microphone
+        // Code to record audio goes here
+        std::cout << "Audio recorded!" << std::endl;
+    }
+};
+
+class SensorySystem {
+public:
+    void processVisualInput(Camera& camera) {
+        std::cout << "Processing visual input..." << std::endl;
+        camera.captureImage();
+        // Code to process visual input goes here
+        std::cout << "Visual input processed!" << std::endl;
+    }
+
+    void processAudioInput(Microphone& microphone) {
+        std::cout << "Processing audio input..." << std::endl;
+        microphone.recordAudio();
+        // Code to process audio input goes here
+        std::cout << "Audio input processed!" << std::endl;
+    }
+};
+
+int main() {
+    Camera camera;
+    Microphone microphone;
+    SensorySystem sensorySystem;
+
+    sensorySystem.processVisualInput(camera);
+    sensorySystem.processAudioInput(microphone);
+
+    return 0;
+}
