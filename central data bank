@@ -1,0 +1,51 @@
+#include <iostream>
+#include <vector>
+
+class DataItem {
+public:
+    DataItem(const std::string& inputData) : data(inputData) {}
+
+    std::string getData() const {
+        return data;
+    }
+
+private:
+    std::string data;
+};
+
+class CentralDataBank {
+public:
+    void storeData(const DataItem& item) {
+        dataItems.push_back(item);
+        std::cout << "Data stored: " << item.getData() << std::endl;
+    }
+
+    void printData() const {
+        std::cout << "Stored Data:" << std::endl;
+        for (const auto& item : dataItems) {
+            std::cout << "- " << item.getData() << std::endl;
+        }
+    }
+
+private:
+    std::vector<DataItem> dataItems;
+};
+
+int main() {
+    CentralDataBank dataBank;
+
+    // Simulating data received from sensory system
+    DataItem item1("Visual data 1");
+    dataBank.storeData(item1);
+
+    DataItem item2("Audio data 1");
+    dataBank.storeData(item2);
+
+    DataItem item3("Visual data 2");
+    dataBank.storeData(item3);
+
+    // Print the stored data
+    dataBank.printData();
+
+    return 0;
+}
