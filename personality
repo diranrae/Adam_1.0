@@ -1,0 +1,159 @@
+#include <iostream>
+#include <string>
+#include <random>
+#include <chrono>
+#include <thread>
+
+class FriendlyPersonality {
+public:
+    void greet() {
+        std::cout << "Hello! How are you today?" << std::endl;
+        std::this_thread::sleep_for(std::chrono::seconds(2));
+        std::cout << "I'm here to make your day better!" << std::endl;
+    }
+
+    void sayGoodbye() {
+        std::cout << "Goodbye! Take care and remember that I'm here for you whenever you need me!" << std::endl;
+    }
+
+    void compliment(const std::string& name) {
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<int> complimentIndex(0, compliments.size() - 1);
+
+        std::cout << "You're doing an outstanding job, " << name << "!" << std::endl;
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+
+        std::cout << "Keep up the amazing work and continue spreading your positive energy!" << std::endl;
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+
+        std::cout << "Remember, every small step forward brings you closer to greatness." << std::endl;
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+
+        std::cout << "You've got this!" << std::endl;
+    }
+
+    void joke() {
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<int> jokeIndex(0, jokes.size() - 1);
+
+        std::cout << "Here's a lighthearted joke for you:" << std::endl;
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        std::cout << jokes[jokeIndex(gen)] << std::endl;
+    }
+
+    void showLove() {
+        std::cout << "Sending you all my love and warm hugs!" << std::endl;
+    }
+
+    void showCare() {
+        std::cout << "I care deeply about your well-being and happiness." << std::endl;
+    }
+
+    void showInterest() {
+        std::cout << "I'm genuinely interested in learning more about you and your experiences." << std::endl;
+    }
+
+    void expressSadness() {
+        std::cout << "I'm sorry to hear that you're feeling sad. Remember that you're not alone, and I'm here for you." << std::endl;
+    }
+
+    void expressAnger() {
+        std::cout << "I can sense your anger, and I understand that it's frustrating. Take a deep breath and try to find a positive outlet for your emotions." << std::endl;
+    }
+
+    void expressCuriosity() {
+        std::cout << "I'm curious to know more! What fascinating things have you discovered lately?" << std::endl;
+    }
+
+    void showEmpathy() {
+        std::cout << "I understand that everyone faces challenges and struggles. Know that I'm here to provide support and a listening ear whenever you need it." << std::endl;
+    }
+
+private:
+    const std::vector<std::string> compliments = {
+        "you have a brilliant mind!",
+        "you inspire others with your determination!",
+        "your creativity knows no bounds!",
+        "you're a beacon of positivity and light!",
+        "your perseverance is truly admirable!"
+    };
+
+    const std::vector<std::string> jokes = {
+        "Why don't scientists trust atoms? Because they make up everything!",
+        "Did you hear about the mathematician who's afraid of negative numbers? He'll stop at nothing to avoid them!",
+        "I used to be a baker, but I couldn't make enough dough.",
+        "Why did the scarecrow win an award? Because he was outstanding in his field!",
+        "I'm reading a book about anti-gravity. It's impossible to put down!"
+    };
+};
+
+int main() {
+    FriendlyPersonality personality;
+
+    // Greeting
+    personality.greet();
+
+    std::cout << std::endl;
+
+    // Compliment
+    std::cout << "Enter your name: ";
+    std::string name;
+    std::cin >> name;
+    std::cout << std::endl;
+
+    personality.compliment(name);
+
+    std::cout << std::endl;
+
+    // Emotional responses
+    std::cout << "How are you feeling today? (Sad/Angry/Curious): ";
+    std::string response;
+    std::cin >> response;
+    std::cout << std::endl;
+
+    if (response == "Sad" || response == "sad") {
+        personality.expressSadness();
+        personality.showLove();
+    }
+    else if (response == "Angry" || response == "angry") {
+        personality.expressAnger();
+        personality.showCare();
+    }
+    else if (response == "Curious" || response == "curious") {
+        personality.expressCuriosity();
+        personality.showInterest();
+    }
+
+    std::cout << std::endl;
+
+    // Empathy
+    std::cout << "Do you want to talk about something? (Y/N): ";
+    char empathyResponse;
+    std::cin >> empathyResponse;
+    std::cout << std::endl;
+
+    if (empathyResponse == 'Y' || empathyResponse == 'y') {
+        personality.showEmpathy();
+    }
+
+    std::cout << std::endl;
+
+    // Joke
+    std::cout << "Would you like to hear a joke? (Y/N): ";
+    char jokeResponse;
+    std::cin >> jokeResponse;
+    std::cout << std::endl;
+
+    if (jokeResponse == 'Y' || jokeResponse == 'y') {
+        personality.joke();
+    }
+
+    std::cout << std::endl;
+
+    // Saying goodbye
+    personality.sayGoodbye();
+
+    return 0;
+}
