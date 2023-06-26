@@ -1,0 +1,58 @@
+#include <iostream>
+#include <vector>
+
+class Joint {
+public:
+    Joint() : name(""), parent(nullptr) {}
+    Joint(const std::string& jointName) : name(jointName), parent(nullptr) {}
+
+    void addChild(Joint* child) {
+        children.push_back(child);
+        child->setParent(this);
+    }
+
+    void setParent(Joint* newParent) {
+        parent = newParent;
+    }
+
+    void printJointHierarchy(int level = 0) const {
+        for (int i = 0; i < level; i++)
+            std::cout << "  ";
+        std::cout << "- " << name << std::endl;
+        for (const auto& child : children)
+            child->printJointHierarchy(level + 1);
+    }
+
+private:
+    std::string name;
+    Joint* parent;
+    std::vector<Joint*> children;
+};
+
+int main() {
+    Joint* rootJoint = new Joint("Root");
+    
+    Joint* torsoJoint = new Joint("Torso");
+    rootJoint->addChild(torsoJoint);
+
+    Joint* headJoint = new Joint("Head");
+    torsoJoint->addChild(headJoint);
+
+    Joint* leftArmJoint = new Joint("Left Arm");
+    torsoJoint->addChild(leftArmJoint);
+    Joint* rightArmJoint = new Joint("Right Arm");
+    torsoJoint->addChild(rightArmJoint);
+
+    Joint* leftLegJoint = new Joint("Left Leg");
+    rootJoint->addChild(leftLegJoint);
+    Joint* rightLegJoint = new Joint("Right Leg");
+    rootJoint->addChild(rightLegJoint);
+
+    // Print the joint hierarchy
+    rootJoint->printJointHierarchy();
+
+    // Clean up memory
+    delete rootJoint;
+
+    return 0;
+}
